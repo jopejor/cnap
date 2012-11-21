@@ -13,18 +13,19 @@ T=1:maximum;
 
 for i=1:maximum
 
-if 0<= T(i) <= P1
-    fecundity(i)=12;
-
-elseif P1< T(i) <= P2
-    fecundity(i)=8;
-
-elseif P2< T(i) <= P3
-    fecundity(i)=4;
-
+if T(i)>P4
+    T(i)=0.0000001;
+    
 elseif P3< T(i) <= P4
     fecundity(i)=2;
-else T(i)=1;
+elseif   P2< T(i) <= P3
+    fecundity(i)=8;
+
+elseif P1< T(i) <= P2
+    fecundity(i)=4;
+else 
+    fecundity(i)=12;
 
 end
 
+end

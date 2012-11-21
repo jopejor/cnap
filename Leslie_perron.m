@@ -1,4 +1,4 @@
-function [S] = Leslie_perron(l,k,fitness)
+function [S] = Leslie_perron(l,mu,sig,A,B)
 
 %Leslie model for aging populations, stationary distribution analysis
 
@@ -44,26 +44,25 @@ function [S] = Leslie_perron(l,k,fitness)
 % Building the Leslie matrix decay l,k,fitness
 % ------------------------------------------
 % 
-maximum=l;
-
-
-
-T=1:maximum;
-
-fecundity = exp(-k*T);
-
-% fecundity = sigmoid_reverse(T,k,Z);
+% maximum=l;
 % 
-% fitness = sigmoid(T,A,B);
-%     fitness(end)=[];
-
-
-
-protoleslie=diag(fitness);
-    addon=zeros(maximum-1,1);
-    preleslie=[protoleslie addon];
-    Leslie=[fecundity;preleslie];
-% %         
+% 
+% 
+% T=1:maximum;
+% 
+% fecundity = 10*exp(-k*T)+0.01;
+% 
+% % fecundity = sigmoid_reverse(T,k,Z);
+% % 
+%  fitness = sigmoid(T,A,B);
+%      fitness(end)=[];
+% 
+% 
+% protoleslie=diag(fitness);
+%     addon=zeros(maximum-1,1);
+%     preleslie=[protoleslie addon];
+%     Leslie=[fecundity;preleslie];
+% % %         
     
 % ------------------------------------------
 % Building the Leslie matrix complete l,k,A,B
@@ -94,18 +93,22 @@ protoleslie=diag(fitness);
 % Building the Leslie matrix gaussian mu,sig,fecundity
 % ------------------------------------------
 
-% maximum=l;
-% 
-% 
-% T=1:maximum;
-% 
-% fitness = gaussmf(T,[sig mu])+0.00001;
-%   fitness(end)=[];
-%   
-% protoleslie=diag(fitness);
-%     addon=zeros(maximum-1,1);
-%     preleslie=[protoleslie addon];
-%     Leslie=[fecundity;preleslie];
+maximum=l;
+
+
+T=1:maximum;
+
+
+fecundity = 10*gaussmf(T,[sig mu])+0.00001;
+
+
+fitness = gaussmf(T,[B A])+0.00001;
+  fitness(end)=[];
+  
+protoleslie=diag(fitness);
+    addon=zeros(maximum-1,1);
+    preleslie=[protoleslie addon];
+    Leslie=[fecundity;preleslie];
           
 % ------------------------------------------
 % Find the eigens
