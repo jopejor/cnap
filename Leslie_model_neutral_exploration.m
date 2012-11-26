@@ -4,9 +4,9 @@
 %  Parameters initialization
 % ------------------------------------------
 
-% fitness = ones(1,29);
+fitness = ones(1,29);
 
-burntime = 10000;
+burntime = 100000;
 
 Chis=zeros(1,burntime);
 
@@ -27,9 +27,9 @@ Chis=zeros(1,burntime);
 
 mu0 = 1;
 
-sig0 = 2;
+sig0 = 4;
 
-A0=1;
+A0=19;
 
 B0=1;
 
@@ -61,7 +61,7 @@ treshold=0.2;
 Statio=cell(1,burntime);
 
 maximum=30;
-s=maximum;
+l=maximum;
 T=1:maximum;
 % %  
 % % ------------------------------------------
@@ -248,7 +248,7 @@ i=1;
 while i<2
  A1=A0+0.2*randn(1);
 
-Trues= (A1<=30) ;
+Trues= (A1>17) & (A1<=30) ;
 
 % Constrained module & (fecundity1 <= 1);
 
@@ -266,7 +266,7 @@ while i<2
   
 B1=B0+0.2*randn(1);
 
-Trues=(B1>0) &(B1<=6) ;
+Trues=(B1>0) & (B1<=10);
 
 % Constrained module & (fecundity1 <= 1);
 
@@ -277,7 +277,7 @@ if Trues == Compare
 end
 end
 
-pop_par2 = Leslie_perron(l, mu1,sig1,A1,B1);
+pop_par2 = Leslie_perron(l,mu1,sig1,A1,B1);
 
 Chi2=sum(power((pop-pop_par2),2));
 

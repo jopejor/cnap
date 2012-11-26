@@ -101,7 +101,7 @@ T=1:maximum;
 
 fecundity = 10*gaussmf(T,[sig mu])+0.00001;
 
-
+% 
 fitness = gaussmf(T,[B A])+0.00001;
   fitness(end)=[];
   
