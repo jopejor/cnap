@@ -7,11 +7,13 @@ function y=sigmoid(x,A,B);
 % A the sigmoid center
 % B the sigmoid width
 
+% 
+% 
+% 
+% y=A+1./(1+exp(-x*B))*(1-A);
 
-y=1./(1+exp(-(x-A)/B));
 
-
-
+y=1./(1+power((A./x),B));
 
 end
 

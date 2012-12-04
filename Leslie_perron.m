@@ -1,4 +1,4 @@
-function [S] = Leslie_perron(l,mu,sig,A,B)
+function [S] = Leslie_perron(l,k,A,B)
 
 %Leslie model for aging populations, stationary distribution analysis
 
@@ -92,23 +92,47 @@ function [S] = Leslie_perron(l,mu,sig,A,B)
 % ------------------------------------------
 % Building the Leslie matrix gaussian mu,sig,fecundity
 % ------------------------------------------
-
+% 
+% maximum=l;
+% 
+% 
+% T=1:maximum;
+% 
+% 
+% fecundity = gaussmf(T,[sig mu])+0.00001;
+% 
+% 
+% fitness = gaussmf(T,[B A])+0.00001;
+%   fitness(end)=[];
+%   
+% protoleslie=diag(fitness);
+%     addon=zeros(maximum-1,1);
+%     preleslie=[protoleslie addon];
+%     Leslie=[fecundity;preleslie];
+          
+% ------------------------------------------
+% Building the Leslie matrix gaussian mu,sig,fecundity
+% ------------------------------------------
+    
+    
 maximum=l;
 
 
 T=1:maximum;
 
+fecundity = exp(-k*T)+0.01;
 
-fecundity = 10*gaussmf(T,[sig mu])+0.00001;
-
+fitness = sigmoid(T,A,B)+0.01;
 % 
-fitness = gaussmf(T,[B A])+0.00001;
+% fitness = gaussmf(T,[B A])+0.00001;
   fitness(end)=[];
+  
+efecundity = fecundity*fitness(1);
   
 protoleslie=diag(fitness);
     addon=zeros(maximum-1,1);
     preleslie=[protoleslie addon];
-    Leslie=[fecundity;preleslie];
+    Leslie=[efecundity;preleslie];
           
 % ------------------------------------------
 % Find the eigens
