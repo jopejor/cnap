@@ -120,7 +120,8 @@ maximum=l;
 
 T=1:maximum;
 
-fecundity = exp(-k*T)+0.01;
+
+
 
 fitness = sigmoid(T,A,B)+0.01;
 % 
